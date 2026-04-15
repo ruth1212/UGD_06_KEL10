@@ -2,17 +2,306 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type='number'] {
-  -moz-appearance: textfield;
-  appearance: textfield;
+/* =============================================
+   CSS VARIABLES — CargoKu Lite Brand System
+   ============================================= */
+:root {
+  /* Brand Colors */
+  --color-primary:        #2E7D32;
+  --color-primary-dark:   #1B5E20;
+  --color-primary-light:  #4CAF50;
+  --color-primary-pale:   #E8F5E9;
+  --color-primary-muted:  #C8E6C9;
+  --color-accent:         #A5D6A7;
+
+  /* Neutrals */
+  --color-white:          #FFFFFF;
+  --color-bg-soft:        #F9FBF9;
+  --color-bg-hero:        #F1F8E9;
+  --color-border:         #E8F5E9;
+  --color-border-mid:     #C8E6C9;
+  --color-text-main:      #1B5E20;
+  --color-text-body:      #374151;
+  --color-text-muted:     #6B7280;
+
+  /* Typography */
+  --font-sans: var(--font-poppins), "Poppins", system-ui, sans-serif;
+
+  /* Spacing / Radius */
+  --radius-sm:   0.5rem;
+  --radius-md:   1rem;
+  --radius-lg:   1.5rem;
+  --radius-xl:   2rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px 0 rgba(46, 125, 50, 0.08);
+  --shadow-btn:  0 4px 14px 0 rgba(46, 125, 50, 0.25);
 }
 
-input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+/* =============================================
+   BASE RESETS
+   ============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
-input[type='number']::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background-color: var(--color-white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =============================================
+   TYPOGRAPHY UTILITIES
+   ============================================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.2;
+}
+
+/* =============================================
+   SCROLLBAR STYLING
+   ============================================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-soft);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-muted);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* =============================================
+   COMPONENT CLASSES
+   ============================================= */
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-btn);
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px 0 rgba(46, 125, 50, 0.35);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  background-color: transparent;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-primary-muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-pale);
+}
+
+/* Cards */
+.card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+  border-color: var(--color-primary-muted);
+  box-shadow: 0 8px 32px 0 rgba(46, 125, 50, 0.12);
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.875rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-green {
+  background-color: var(--color-primary-pale);
+  color: var(--color-primary-dark);
+}
+.badge-light {
+  background-color: var(--color-bg-soft);
+  color: var(--color-text-muted);
+}
+
+/* Status pill */
+.status-active {
+  background-color: rgba(76, 175, 80, 0.12);
+  color: var(--color-primary-light);
+}
+.status-done {
+  background-color: rgba(46, 125, 50, 0.12);
+  color: var(--color-primary);
+}
+
+/* Input */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid var(--color-border-mid);
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-text-body);
+  background-color: var(--color-white);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+.input-field::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Section label */
+.section-label {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary-light);
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+/* =============================================
+   PAGE TRANSITIONS / ANIMATIONS
+   ============================================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(76, 175, 80, 0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease both;
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+.animate-delay-500 { animation-delay: 0.5s; }
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1px 8px 0 rgba(46, 125, 50, 0.06);
+}
+
+/* =============================================
+   HERO SECTION
+   ============================================= */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-pale) 0%,
+    var(--color-white) 50%,
+    var(--color-bg-hero) 100%
+  );
+}
+
+/* =============================================
+   FEATURE CARD ICON
+   ============================================= */
+.feature-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background-color: var(--color-primary);
+  transition: background-color 0.2s ease;
+}
+.card:hover .feature-icon {
+  background-color: var(--color-primary-dark);
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+.footer {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
 }
